@@ -7,6 +7,7 @@ def identify_most_updated_clients(
     col_id: str = "cod_cliente",
 ) -> DataFrame:
     
+    # dropar linhas duplicadas, antes de realizar a operação, pode nos levar a um resultado mais acurado
     df =  df.groupBy(col_id)\
            .agg(count(lit(1)).alias("qtd_atualizacoes"))\
            .orderBy(col("qtd_atualizacoes").desc(), col('cod_cliente').asc())\
